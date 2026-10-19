@@ -1,4 +1,4 @@
-
+import { NavLink, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 
 const projects = [
@@ -55,134 +55,254 @@ const skills = [
   "Agile / Scrum",
 ];
 
-function App() {
+function Header() {
+  const links = [
+    { label: "Home", to: "/", end: true },
+    { label: "Skills", to: "/skills" },
+    { label: "Projects", to: "/projects" },
+    { label: "About", to: "/about" },
+  ];
+
   return (
-    <div className="portfolio">
-      <header className="navbar">
-        <a className="logo" href="#home" aria-label="Go to home">
-          V<span>.</span>
-        </a>
+    <header className="navbar">
+      <Link className="logo" to="/" aria-label="Go to home">
+        V<span>.</span>
+      </Link>
 
-        <nav aria-label="Main navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
+      <nav aria-label="Main navigation">
+        {links.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.end}
+            className={({ isActive }) =>
+              isActive ? "nav-link nav-link-active" : "nav-link"
+            }
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
 
-        <a
-          className="nav-button"
-          href="https://github.com/Vihini234"
-          target="_blank"
-          rel="noreferrer"
+      <a
+        className="nav-button"
+        href="https://github.com/Vihini234"
+        target="_blank"
+        rel="noreferrer"
+      >
+        GITHUB ↗
+      </a>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <Link className="logo" to="/">
+        V<span>.</span>
+      </Link>
+      <p>Designed with curiosity. Built for quality.</p>
+      <a
+        href="https://github.com/Vihini234"
+        target="_blank"
+        rel="noreferrer"
+      >
+        © 2026 Vihini Ranasingha
+      </a>
+    </footer>
+  );
+}
+
+function PageHeading({ eyebrow, children, description }) {
+  return (
+    <div className="page-heading">
+      <p className="eyebrow">{eyebrow}</p>
+      <h1>{children}</h1>
+      {description && <p className="page-description">{description}</p>}
+    </div>
+  );
+}
+
+function HomePage() {
+  return (
+    <main>
+      <section className="hero">
+        <div className="hero-content">
+          <p className="eyebrow">HELLO, WELCOME TO MY PORTFOLIO</p>
+
+          <h1>
+            Vihini
+            <br />
+            <span>Ranasingha</span>
+            <span className="accent">.</span>
+          </h1>
+
+          <h2>QA Engineer | Software Testing Enthusiast</h2>
+
+          <p className="hero-description">
+            I'm an IT undergraduate passionate about software quality
+            assurance, finding defects, validating functionality, and helping
+            deliver reliable digital experiences. Explore my hands-on testing
+            projects and QA documentation.
+          </p>
+
+          <div className="hero-actions">
+            <Link className="button button-orange" to="/projects">
+              EXPLORE MY PROJECTS ↗
+            </Link>
+            <a className="button button-outline" href="mailto:rvihini@gmail.com">
+              CONTACT ME
+            </a>
+          </div>
+
+          <div className="social-links">
+            <a href="https://github.com/Vihini234" target="_blank" rel="noreferrer">
+              GitHub ↗
+            </a>
+            <a href="mailto:rvihini@gmail.com">Connect with me ↗</a>
+          </div>
+        </div>
+
+        <div className="hero-visual">
+          <div className="portrait-backdrop" />
+          <div className="portrait-frame">
+            <img
+              src="/my-photo.jpeg"
+              alt="Vihini Ranasingha"
+              className="hero-photo"
+            />
+            <div className="photo-label">
+              <span className="status-dot" />
+              SOFTWARE QUALITY ASSURANCE
+            </div>
+          </div>
+
+          <div className="floating-card">
+            <span className="floating-icon">✓</span>
+            <div>
+              <strong>Quality first</strong>
+              <small>Think · Test · Improve</small>
+            </div>
+          </div>
+          <p className="visual-caption">MY QA JOURNEY / 2026</p>
+        </div>
+
+        <span className="hero-index">PORTFOLIO — 2026</span>
+      </section>
+
+      <section className="stats" aria-label="Portfolio highlights">
+        <div><strong>04</strong><span>FEATURED PROJECTS</span></div>
+        <div><strong>03+</strong><span>TESTING AREAS</span></div>
+        <div><strong>12</strong><span>CORE SKILLS</span></div>
+        <div><strong>∞</strong><span>CONTINUOUS LEARNING</span></div>
+      </section>
+
+      <section className="home-next section">
+        <p className="eyebrow">EXPLORE MY WORK</p>
+        <h2>Quality is built one test at a time<span className="accent">.</span></h2>
+        <div className="quick-links">
+          <Link className="quick-link-card" to="/skills">
+            <span>01 / TOOLKIT</span><strong>Skills & technologies ↗</strong>
+          </Link>
+          <Link className="quick-link-card" to="/projects">
+            <span>02 / SELECTED WORK</span><strong>QA projects ↗</strong>
+          </Link>
+          <Link className="quick-link-card" to="/about">
+            <span>03 / MY STORY</span><strong>About me ↗</strong>
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function SkillsPage() {
+  return (
+    <main className="page-main">
+      <section className="section page-content">
+        <PageHeading
+          eyebrow="01 / MY TOOLKIT"
+          description="Tools and techniques used across my testing projects."
         >
-          GITHUB ↗
-        </a>
-      </header>
+          Skills & technologies<span className="accent">.</span>
+        </PageHeading>
 
-      <main>
-        <section className="hero" id="home">
-          <div className="hero-content">
-            <p className="eyebrow">HELLO, WELCOME TO MY PORTFOLIO</p>
+        <div className="skill-grid">
+          {skills.map((skill, index) => (
+            <article className="skill-card" key={skill}>
+              <span className="skill-number">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{skill}</h3>
+              <span className="skill-arrow">↗</span>
+            </article>
+          ))}
+        </div>
 
-            <h1>
-              Vihini
-              <br />
-              <span>Ranasingha</span>
-              <span className="accent">.</span>
-            </h1>
+        <div className="page-cta">
+          <p>Want to see these skills applied in practice?</p>
+          <Link className="button button-orange" to="/projects">VIEW MY PROJECTS ↗</Link>
+        </div>
+      </section>
+    </main>
+  );
+}
 
-            <h2>QA Engineer | Software Testing Enthusiast</h2>
+function ProjectsPage() {
+  return (
+    <main className="page-main">
+      <section className="section page-content">
+        <PageHeading
+          eyebrow="02 / SELECTED WORK"
+          description="A selection of practical projects demonstrating my approach to software quality assurance."
+        >
+          My QA projects<span className="accent">.</span>
+        </PageHeading>
 
-            <p className="hero-description">
-              I'm an IT undergraduate passionate about software quality
-              assurance, finding defects, validating functionality, and
-              helping deliver reliable digital experiences. Explore my
-              hands-on testing projects and QA documentation.
-            </p>
-
-            <div className="hero-actions">
-              <a className="button button-orange" href="#projects">
-                EXPLORE MY PROJECTS ↗
-              </a>
-
-              <a className="button button-outline" href="#contact">
-                CONTACT ME
-              </a>
-            </div>
-
-            <div className="social-links">
-              <a
-                href="https://github.com/Vihini234"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub ↗
-              </a>
-              <a href="#contact">Connect with me ↗</a>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <div className="portrait-backdrop" />
-
-            <div className="portrait-frame">
-              <img
-                src="/my-photo.jpeg"
-                alt="Vihini Ranasingha"
-                className="hero-photo"
-              />
-
-              <div className="photo-label">
-                <span className="status-dot" />
-                SOFTWARE QUALITY ASSURANCE
+        <div className="project-grid">
+          {projects.map((project) => (
+            <article className="project-card" key={project.number}>
+              <div className="project-top">
+                <span>{project.number} / PROJECT</span><span>↗</span>
               </div>
-            </div>
-
-            <div className="floating-card">
-              <span className="floating-icon">✓</span>
-              <div>
-                <strong>Quality first</strong>
-                <small>Think · Test · Improve</small>
+              <p className="project-type">{project.category}</p>
+              <h3>{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+              <div className="tag-list">
+                {project.tools.map((tool) => <span className="tag" key={tool}>{tool}</span>)}
               </div>
-            </div>
+              <a className="project-link" href={project.url} target="_blank" rel="noreferrer">
+                VIEW REPOSITORY ↗
+              </a>
+            </article>
+          ))}
+        </div>
 
-            <p className="visual-caption">MY QA JOURNEY / 2026</p>
-          </div>
+        <div className="page-cta">
+          <p>Explore all my repositories on GitHub.</p>
+          <a className="button button-outline" href="https://github.com/Vihini234" target="_blank" rel="noreferrer">
+            ALL REPOSITORIES ↗
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
 
-          <span className="hero-index">PORTFOLIO — 2026</span>
-        </section>
+function AboutPage() {
+  return (
+    <main className="page-main">
+      <section className="section page-content">
+        <PageHeading
+          eyebrow="03 / ABOUT ME"
+          description="A little about my background, learning journey, and interest in software quality."
+        >
+          Curious by nature.<br /><span className="accent">Quality by choice.</span>
+        </PageHeading>
 
-        <section className="stats" aria-label="Portfolio highlights">
-          <div>
-            <strong>04</strong>
-            <span>FEATURED PROJECTS</span>
+        <div className="about about-page-layout">
+          <div className="about-photo-wrap">
+            <img src="/my-photo.jpeg" alt="Vihini Ranasingha" className="about-photo" />
           </div>
-          <div>
-            <strong>03+</strong>
-            <span>TESTING AREAS</span>
-          </div>
-          <div>
-            <strong>12</strong>
-            <span>CORE SKILLS</span>
-          </div>
-          <div>
-            <strong>∞</strong>
-            <span>CONTINUOUS LEARNING</span>
-          </div>
-        </section>
-
-        <section className="about section" id="about">
-          <div className="section-heading">
-            <p className="eyebrow">01 / ABOUT ME</p>
-            <h2>
-              Curious by nature.
-              <br />
-              <span>Quality by choice.</span>
-            </h2>
-          </div>
-
           <div className="about-copy">
             <p>
               I'm Vihini Ranasingha, an IT undergraduate building practical
@@ -190,113 +310,22 @@ function App() {
               analysing requirements, creating test scenarios, validating
               application behaviour, and documenting defects clearly.
             </p>
-
             <p>
               My projects cover UI automation with Playwright, database
               validation with SQL, REST API testing with Postman, and manual
               testing documentation.
             </p>
-
-            <a
-              className="text-link"
-              href="https://github.com/Vihini234"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="text-link" href="https://github.com/Vihini234" target="_blank" rel="noreferrer">
               EXPLORE MY GITHUB ↗
             </a>
           </div>
-        </section>
+        </div>
 
-        <section className="skills section" id="skills">
-          <div className="section-title-row">
-            <div>
-              <p className="eyebrow">02 / MY TOOLKIT</p>
-              <h2>
-                Skills & technologies<span className="accent">.</span>
-              </h2>
-            </div>
-            <p className="muted">
-              Tools and techniques used across my testing projects.
-            </p>
-          </div>
-
-          <div className="skill-grid">
-            {skills.map((skill, index) => (
-              <article className="skill-card" key={skill}>
-                <span className="skill-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3>{skill}</h3>
-                <span className="skill-arrow">↗</span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="projects section" id="projects">
-          <div className="section-title-row">
-            <div>
-              <p className="eyebrow">03 / SELECTED WORK</p>
-              <h2>
-                My QA projects<span className="accent">.</span>
-              </h2>
-            </div>
-
-            <a
-              className="text-link"
-              href="https://github.com/Vihini234"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ALL REPOSITORIES ↗
-            </a>
-          </div>
-
-          <div className="project-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.number}>
-                <div className="project-top">
-                  <span>{project.number} / PROJECT</span>
-                  <span>↗</span>
-                </div>
-
-                <p className="project-type">{project.category}</p>
-                <h3>{project.title}</h3>
-                <p className="project-description">
-                  {project.description}
-                </p>
-
-                <div className="tag-list">
-                  {project.tools.map((tool) => (
-                    <span className="tag" key={tool}>
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  className="project-link"
-                  href={project.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`View ${project.title} on GitHub`}
-                >
-                  VIEW REPOSITORY ↗
-                </a>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="education section" id="education">
+        <section className="education about-education">
           <div>
-            <p className="eyebrow">04 / EDUCATION</p>
-            <h2>
-              Learning & growing<span className="accent">.</span>
-            </h2>
+            <p className="eyebrow">EDUCATION</p>
+            <h2>Learning & growing<span className="accent">.</span></h2>
           </div>
-
           <article className="education-card">
             <span className="education-year">UNDERGRADUATE</span>
             <h3>Industrial Information Technology</h3>
@@ -308,57 +337,38 @@ function App() {
           </article>
         </section>
 
-        <section className="contact section" id="contact">
-          <p className="eyebrow">05 / GET IN TOUCH</p>
-
-          <h2>
-            Let's build
-            <br />
-            <span>better software.</span>
-          </h2>
-
+        <section className="contact about-contact">
+          <p className="eyebrow">GET IN TOUCH</p>
+          <h2>Let's build<br /><span>better software.</span></h2>
           <p className="contact-copy">
-            I'm interested in QA internship opportunities, testing
-            collaborations, and connecting with other people in tech.
+            I'm interested in QA internship opportunities, testing collaborations,
+            and connecting with other people in tech.
           </p>
-
           <div className="hero-actions contact-actions">
-            <a
-              className="button button-orange"
-              href="https://github.com/Vihini234"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="button button-orange" href="mailto:rvihini@gmail.com">EMAIL ME ↗</a>
+            <a className="button button-outline" href="https://github.com/Vihini234" target="_blank" rel="noreferrer">
               VISIT MY GITHUB ↗
             </a>
-
-            <a
-              className="button button-outline"
-              href="mailto:rvihini@gmail.com"
-            >
-              EMAIL ME ↗
-            </a>
           </div>
-
-          <p className="contact-note">
-            Feel free to contact me at rvihini@gmail.com.
-          </p>
+          <p className="contact-note">Feel free to contact me at rvihini@gmail.com.</p>
         </section>
-      </main>
+      </section>
+    </main>
+  );
+}
 
-      <footer className="footer">
-        <a className="logo" href="#home">
-          V<span>.</span>
-        </a>
-        <p>Designed with curiosity. Built for quality.</p>
-        <a
-          href="https://github.com/Vihini234"
-          target="_blank"
-          rel="noreferrer"
-        >
-          © 2026 Vihini Ranasingha
-        </a>
-      </footer>
+function App() {
+  return (
+    <div className="portfolio">
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/skills" element={<SkillsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
