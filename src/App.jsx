@@ -38,6 +38,15 @@ const projects = [
     tools: ["Manual QA", "Test Cases", "Bug Reports"],
     url: "https://github.com/Vihini234/QA-Portfolio",
   },
+  {
+    number: "05",
+    category: "MANUAL TESTING",
+    title: "SauceDemo E-commerce Testing",
+    description:
+      "End-to-end manual testing of an e-commerce application, covering requirement analysis, test planning, test case design, test execution, defect investigation, and test summary documentation.",
+    tools: ["Manual QA", "Test Cases", "Bug Reports", "Test Execution"],
+    url: "https://github.com/Vihini234/SauceDemo-Ecommerce-Testing",
+  },
 ];
 
 const skills = [
@@ -192,7 +201,7 @@ function HomePage() {
       </section>
 
       <section className="stats" aria-label="Portfolio highlights">
-        <div><strong>04</strong><span>FEATURED PROJECTS</span></div>
+        <div><strong>05</strong><span>FEATURED PROJECTS</span></div>
         <div><strong>03+</strong><span>TESTING AREAS</span></div>
         <div><strong>12</strong><span>CORE SKILLS</span></div>
         <div><strong>∞</strong><span>CONTINUOUS LEARNING</span></div>
